@@ -62,15 +62,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Cache Rust dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: windows-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: windows-cargo-
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -104,24 +95,24 @@ jobs:
           name: ${{ env.BINARY_NAME }}-windows
           path: build/out/*
 
-  build-macos-arm:
-    runs-on: macos-latest
+  build-macos-slices:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            arch: arm
+          - os: macos-15-intel
+            target: x86_64-apple-darwin
+            arch: intel
     steps:
       - uses: actions/checkout@v4
-      - name: Cache Rust dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: macos-arm-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: macos-arm-cargo-
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: aarch64-apple-darwin
+          targets: ${{ matrix.target }}
 
       - name: Build Dependencies 
         run: |
@@ -130,57 +121,21 @@ jobs:
           cargo patch-crate --force
           mkdir -p build/out
 
-      - name: Build (macOS ARM)
+      - name: Build (macOS ${{ matrix.arch }})
         run: |
-          cargo build --bin ${{ env.BINARY_NAME }} --release
-          strip target/release/${{ env.BINARY_NAME }}
-          cp target/release/${{ env.BINARY_NAME }} build/out/${{ env.BINARY_NAME }}-arm
+          cargo build --bin ${{ env.BINARY_NAME }} --release --target ${{ matrix.target }}
+          strip target/${{ matrix.target }}/release/${{ env.BINARY_NAME }}
+          cp target/${{ matrix.target }}/release/${{ env.BINARY_NAME }} build/out/${{ env.BINARY_NAME }}-${{ matrix.arch }}
 
-      - name: Upload ARM Slice
+      - name: Upload ${{ matrix.arch }} Slice
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.BINARY_NAME }}-macos-slice-arm
-          path: build/out/${{ env.BINARY_NAME }}-arm
-
-  build-macos-intel:
-    runs-on: macos-15-intel
-    steps:
-      - uses: actions/checkout@v4
-      - name: Cache Rust dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: macos-intel-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: macos-intel-cargo-
-
-      - name: Install Rust stable
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Build Dependencies 
-        run: |
-          cargo install patch-crate
-          cargo fetch --locked || true
-          cargo patch-crate --force
-          mkdir -p build/out
-
-      - name: Build (macOS Intel)
-        run: |
-          cargo build --bin ${{ env.BINARY_NAME }} --release
-          strip target/release/${{ env.BINARY_NAME }}
-          cp target/release/${{ env.BINARY_NAME }} build/out/${{ env.BINARY_NAME }}-intel
-
-      - name: Upload Intel Slice
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.BINARY_NAME }}-macos-slice-intel
-          path: build/out/${{ env.BINARY_NAME }}-intel
+          name: ${{ env.BINARY_NAME }}-macos-slice-${{ matrix.arch }}
+          path: build/out/${{ env.BINARY_NAME }}-${{ matrix.arch }}
 
   build-macos-universal:
     runs-on: macos-latest
-    needs: [build-macos-arm, build-macos-intel]
+    needs: [build-macos-slices]
     steps:
       - uses: actions/checkout@v4
 
