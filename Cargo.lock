@@ -1866,7 +1866,7 @@ dependencies = [
  "libc",
  "percent-encoding",
  "pin-project-lite",
- "socket2 0.6.0",
+ "socket2 0.5.10",
  "system-configuration 0.6.1",
  "tokio",
  "tower-service",
@@ -2215,7 +2215,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "07033963ba89ebaf1584d767badaa2e8fcec21aedea6b8c0346d487d49c28667"
 dependencies = [
  "cfg-if",
- "windows-targets 0.53.3",
+ "windows-targets 0.48.5",
 ]
 
 [[package]]
@@ -3101,7 +3101,7 @@ dependencies = [
  "quinn-udp",
  "rustc-hash",
  "rustls 0.23.32",
- "socket2 0.6.0",
+ "socket2 0.5.10",
  "thiserror 2.0.16",
  "tokio",
  "tracing",
@@ -3138,7 +3138,7 @@ dependencies = [
  "cfg_aliases",
  "libc",
  "once_cell",
- "socket2 0.6.0",
+ "socket2 0.5.10",
  "tracing",
  "windows-sys 0.60.2",
 ]
@@ -4869,7 +4869,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.61.0",
+ "windows-sys 0.48.0",
 ]
 
 [[package]]
@@ -5246,8 +5246,7 @@ checksum = "ea2f10b9bb0928dfb1b42b65e1f9e36f7f54dbdf08457afefb38afcdec4fa2bb"
 [[package]]
 name = "wxdragon"
 version = "0.9.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "387582e9b06f1665c4807211e8a768911dfca14bd5fd4920456b4ceb96b82720"
+source = "git+https://github.com/PlumeImpactor/wxDragon?rev=7d407ce#7d407ce7e70904788e68abc4251e6d62d113e8e0"
 dependencies = [
  "bitflags 2.9.4",
  "log",
@@ -5259,8 +5258,7 @@ dependencies = [
 [[package]]
 name = "wxdragon-macros"
 version = "0.9.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22c0e49dbb26c84bba760b56b858982f93e0effcb521e8a6b598ba082fb2616c"
+source = "git+https://github.com/PlumeImpactor/wxDragon?rev=7d407ce#7d407ce7e70904788e68abc4251e6d62d113e8e0"
 dependencies = [
  "proc-macro2",
  "quick-xml",
@@ -5271,8 +5269,7 @@ dependencies = [
 [[package]]
 name = "wxdragon-sys"
 version = "0.9.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "39c289d767e8334f4d5792b887bad08283b1596240b257db2fae9301cdd925ae"
+source = "git+https://github.com/PlumeImpactor/wxDragon?rev=7d407ce#7d407ce7e70904788e68abc4251e6d62d113e8e0"
 dependencies = [
  "bindgen",
  "cmake",
