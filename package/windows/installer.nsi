@@ -4,7 +4,7 @@
 
 !define APPNAME "PlumeImpactor"
 !define APPEXE  "plumeimpactor.exe"
-!define COMPANY "Samara"
+!define COMPANY "Jsl"
 
 Name "${APPNAME}"
 BrandingText "${APPNAME} Setup"
