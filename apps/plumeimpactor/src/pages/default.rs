@@ -57,8 +57,8 @@ pub fn create_default_page(frame: &Frame) -> DefaultPage {
         .with_label("Made with 💖 from ")
         .build();
     let khcrysalis_link = HyperlinkCtrl::builder(&panel)
-        .with_label("SAMSAM")
-        .with_url("https://github.com/khcrysalis")
+        .with_label("Jsl")
+        .with_url("https://github.com/Zx-Jasil")
         .with_style(HyperlinkCtrlStyle::AlignLeft | HyperlinkCtrlStyle::NoUnderline)
         .build();
     let separator1 = StaticText::builder(&panel)
@@ -66,7 +66,7 @@ pub fn create_default_page(frame: &Frame) -> DefaultPage {
         .build();
     let github_link = HyperlinkCtrl::builder(&panel)
         .with_label("GitHub")
-        .with_url("https://github.com/khcrysalis/plumeimpactor")
+        .with_url("https://github.com/Zx-Jasil/Jsl-pacher")
         .with_style(HyperlinkCtrlStyle::AlignLeft | HyperlinkCtrlStyle::NoUnderline)
         .build();
     let separator2 = StaticText::builder(&panel)
@@ -74,7 +74,7 @@ pub fn create_default_page(frame: &Frame) -> DefaultPage {
         .build();
     let donate_link = HyperlinkCtrl::builder(&panel)
         .with_label("Donate")
-        .with_url("https://github.com/sponsors/khcrysalis")
+        .with_url("https://github.com/Zx-Jasil")
         .with_style(HyperlinkCtrlStyle::AlignLeft | HyperlinkCtrlStyle::NoUnderline)
         .build();
     love_sizer.add(&made_with_text, 0, SizerFlag::AlignCenterVertical, 0);
